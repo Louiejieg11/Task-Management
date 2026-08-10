@@ -119,7 +119,7 @@ npm run dev
 Then go to:
 
 ```text
-http://127.0.0.1:8000/projects
+http://127.0.0.1:8000
 ```
 
 ## Implementation Approach
