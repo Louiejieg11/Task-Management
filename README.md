@@ -30,8 +30,8 @@ You will need:
 Clone the repository:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd task-manager
+git clone https://github.com/Louiejieg11/Task-Management.git
+cd Task-Management
 ```
 
 Install Laravel dependencies:
@@ -60,7 +60,7 @@ php artisan key:generate
 
 ### Database Setup
 
-Create a MySQL database named `task-manager`.
+Create a MySQL database named `taskmanager`.
 
 Update the database configuration in `.env`:
 
@@ -79,9 +79,9 @@ Run the migrations and seed the sample projects:
 php artisan migrate:fresh --seed
 ```
 
-This will create the required tables and insert the sample project data.
+This will create the required database tables and insert the sample project data.
 
-### Running the Application
+## Running the Application
 
 Start the Laravel development server:
 
@@ -89,16 +89,37 @@ Start the Laravel development server:
 php artisan serve
 ```
 
-In another terminal, start Vite:
+In another terminal, start the Vite development server:
 
 ```bash
 npm run dev
 ```
 
-Then open:
+Once both servers are running, open the main project management page:
+
+**http://127.0.0.1:8000/projects**
+
+This is the main page of the application where you can view and manage the projects.
+
+### Quick Start
+
+After completing the installation and database setup:
+
+```bash
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+In a separate terminal:
+
+```bash
+npm run dev
+```
+
+Then go to:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:8000/projects
 ```
 
 ## Implementation Approach
@@ -144,6 +165,7 @@ MySQL
 - The sample projects provided for the assessment are included through a Laravel seeder.
 - Laravel's built-in authentication setup is available, although the project routes are currently accessible without authentication for the purposes of the assessment.
 - Project IDs are generated automatically by the database.
+- The application is accessed through `/projects` after the development servers are started.
 
 # Technical Reflection
 
@@ -155,7 +177,7 @@ Inertia made the integration between Laravel and React simpler. Instead of creat
 
 For this assessment, I felt this was a good fit because the application is mainly a CRUD application and doesn't require the complexity of a completely separate frontend and backend.
 
-It also allowed me to keep the project structure fairly straightforward.
+It also allowed me to keep the project structure fairly straightforward while still having a modern React-based frontend.
 
 ## What tradeoffs did you make?
 
