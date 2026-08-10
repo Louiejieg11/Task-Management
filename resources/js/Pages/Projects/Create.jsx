@@ -7,7 +7,7 @@ export default function Create() {
 			<div className="flex justify-between mb-6">
 				<h1 className="text-2xl font-bold">Create Project</h1>
 
-				<Link href="/projects">Back</Link>
+				<Link href="/">Back</Link>
 			</div>
 
 			<ProjectForm />
