@@ -97,7 +97,7 @@ npm run dev
 
 Once both servers are running, open the main project management page:
 
-**http://127.0.0.1:8000/projects**
+**http://127.0.0.1:8000**
 
 This is the main page of the application where you can view and manage the projects.
 
