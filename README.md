@@ -1,59 +1,234 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple project management application built using **Laravel, Inertia.js, React, MySQL, and Tailwind CSS**.
 
-## About Laravel
+The application allows users to manage projects by creating, viewing, editing, and deleting project records. Each project includes information such as the client, project name, description, status, priority, start date, and due date.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technology Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Laravel** – Backend framework used for routing, validation, database operations, and application logic.
+- **React** – Used to build the frontend interface and reusable components.
+- **Inertia.js** – Used as the bridge between Laravel and React. This allows the application to use React for the UI while keeping Laravel responsible for routing and server-side logic.
+- **MySQL** – Used for storing project data.
+- **Tailwind CSS** – Used for styling the application.
+- **Vite** – Used for compiling and serving the React frontend during development.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Setup Instructions
 
-## Learning Laravel
+### Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+You will need:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Composer
+- Node.js and npm
+- MySQL
+- Laragon or another Laravel-compatible local development environment
 
-## Laravel Sponsors
+### Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Clone the repository:
 
-### Premium Partners
+```bash
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd task-manager
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Install Laravel dependencies:
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install React/frontend dependencies:
 
-## Code of Conduct
+```bash
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Create the environment file:
 
-## Security Vulnerabilities
+```bash
+copy .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate the application key:
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Database Setup
+
+Create a MySQL database named `task-manager`.
+
+Update the database configuration in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=taskmanager
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+Run the migrations and seed the sample projects:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+This will create the required tables and insert the sample project data.
+
+### Running the Application
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+In another terminal, start Vite:
+
+```bash
+npm run dev
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Implementation Approach
+
+I used **Laravel with Inertia.js and React** rather than creating a separate Laravel API and React application.
+
+Laravel handles the backend side of the application, including:
+
+- Routes
+- Controllers
+- Form validation
+- Eloquent models
+- Database operations
+
+React handles the user interface, while Inertia connects the two.
+
+For example, the project form uses Inertia's `useForm` hook to submit data to Laravel. This means I don't need to manually create a separate API request layer just to communicate between the React frontend and Laravel backend.
+
+The project CRUD flow is roughly:
+
+```text
+React Form
+    ↓
+Inertia.js
+    ↓
+Laravel Route
+    ↓
+ProjectController
+    ↓
+Form Request Validation
+    ↓
+Project Model
+    ↓
+MySQL
+```
+
+## Assumptions
+
+- The application is intended to run in a local development environment.
+- MySQL is used as the database.
+- Projects have four possible statuses: Planning, In Progress, On Hold, and Completed.
+- Projects have three possible priorities: Low, Medium, and High.
+- The sample projects provided for the assessment are included through a Laravel seeder.
+- Laravel's built-in authentication setup is available, although the project routes are currently accessible without authentication for the purposes of the assessment.
+- Project IDs are generated automatically by the database.
+
+# Technical Reflection
+
+## Why did you choose this implementation approach?
+
+I chose Laravel, Inertia.js, and React because I'm comfortable with the Laravel ecosystem and wanted to use React for the frontend.
+
+Inertia made the integration between Laravel and React simpler. Instead of creating a separate REST API and then handling API requests from React, I could keep the routing and backend logic inside Laravel while still building the UI using React.
+
+For this assessment, I felt this was a good fit because the application is mainly a CRUD application and doesn't require the complexity of a completely separate frontend and backend.
+
+It also allowed me to keep the project structure fairly straightforward.
+
+## What tradeoffs did you make?
+
+The main tradeoff was using Inertia instead of building a separate API.
+
+With Inertia, I was able to develop the application faster and avoid having to maintain a separate API layer. Laravel handles the requests and validation, while React handles the UI.
+
+The downside is that the frontend is more closely connected to the Laravel application. If the application were eventually going to support a mobile application or several different frontend clients, I would probably consider creating a dedicated API.
+
+I also focused on the main requirements of the assessment instead of spending too much time on additional features that weren't required.
+
+## What would you improve if given additional time?
+
+If I had more time, I would improve both the functionality and the overall user experience.
+
+Some things I would add are:
+
+- Automated tests for the project CRUD functionality.
+- Search and filtering.
+- Pagination for larger numbers of projects.
+- Better loading and error states.
+- A confirmation dialog before deleting a project.
+- More detailed authorization and permissions.
+- Improved form validation and error messages.
+- More responsive and accessible UI components.
+- Better handling of empty project lists.
+- CI/CD checks using GitHub Actions.
+
+I would also spend more time refactoring some of the components and making the code more reusable.
+
+## What was the most challenging part of this assessment?
+
+The most challenging part was getting Laravel, Inertia.js, and React to work together correctly.
+
+There were a few issues where the frontend route and backend route were not matching. For example, the page for creating a project is:
+
+```text
+GET /projects/create
+```
+
+but the form needs to submit to:
+
+```text
+POST /projects
+```
+
+I initially had the form submitting to `/projects/create`, which caused a `MethodNotAllowedHttpException` because that route was only configured for GET.
+
+I also had to troubleshoot route naming, Inertia page resolution, database configuration, migrations, validation, and making sure the names used in React matched the Laravel request validation and database columns.
+
+Those issues were probably the most useful part of the assessment because they helped me understand the flow between the React frontend, Inertia, Laravel, and the database more clearly.
+
+## Did you use AI tools during development?
+
+Yes, I used AI during development.
+
+### Which tools?
+
+I used **ChatGPT**.
+
+### How were they used?
+
+I mainly used ChatGPT as a debugging and development assistant.
+
+I used it to help me:
+
+- Understand Laravel error messages.
+- Debug route and HTTP method issues.
+- Troubleshoot Inertia and React errors.
+- Review controllers and form request validation.
+- Check database and migration problems.
+- Create the initial project seed data.
+- Review parts of the implementation when I got stuck.
+- Understand why certain errors were happening and how to fix them.
+
+I still tested the changes locally and reviewed the code before using it in the project. I used AI mainly to help me work through problems faster and understand the issues I encountered during development.
